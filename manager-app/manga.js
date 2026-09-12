@@ -5,9 +5,13 @@ const statusSelect = document.querySelector('#status-select');
 const errorTip = document.querySelector('#error-tip');
 const recordList = document.querySelector('#record-list');
 
-let comicList = [];
-
 const statusArr = ["未读", "阅读中", "已读完"];
+
+let comicList = JSON.parse(localStorage.getItem('comicRecords') || '[]');
+
+function saveData() {
+    localStorage.setItem('comicRecords', JSON.stringify(comicList));
+}
 
 function render() {
     recordList.innerHTML = '';
@@ -46,14 +50,17 @@ recordList.addEventListener('click', function (e) {
     const clickId = Number(e.target.dataset.id);
     if (e.target.classList.contains('del-btn')) {
         comicList = comicList.filter(item => item.id !== clickId);
+        saveData();
         render();
     }
+
     if (e.target.classList.contains('edit-btn')) {
         const targetComic = comicList.find(c => c.id === clickId);
         if (targetComic) {
             let idx = statusArr.indexOf(targetComic.status);
             idx = (idx + 1) % statusArr.length;
             targetComic.status = statusArr[idx];
+            saveData();
             render();
         }
     }
@@ -82,6 +89,8 @@ form.addEventListener('submit', function (e) {
         author: author,
         status: status
     })
+
+    saveData();
 
     titleInput.value = '';
     authorInput.value = '';
