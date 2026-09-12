@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>漫画阅读记录</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: sans-serif;
+            max-width: 520px;
+            margin: 24px auto;
+            padding: 0 16px;
+        }
+
+        .tip {
+            color: #c00;
+            font-size: 14px;
+            min-height: 20px;
+        }
+
+        .record-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-未读 {
+            color: #666;
+        }
+
+        .status-阅读中 {
+            color: #0066cc;
+        }
+
+        .status-已读完 {
+            color: #229933;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .del-btn {
+            margin-left: auto;
+            background: #dd4444;
+            color: white;
+            border: none;
+            padding: 3px 8px;
+            border-radius: 3px;
+        }
+
+        .edit-btn {
+            background: #3377dd;
+            color: white;
+            border: none;
+            padding: 3px 8px;
+            border-radius: 3px;
+        }
+
+        form>div {
+            margin: 8px 0;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 6px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>📖漫画阅读记录</h1>
+    <form id="add-form">
+        <div>
+            <label>漫画名称</label>
+            <input type="text" id="title-input" placeholder="输入漫画名称">
+        </div>
+        <div>
+            <label>作者</label>
+            <input type="text" id="author-input" placeholder="输入作者名字">
+        </div>
+        <div>
+            <label>阅读状态</label>
+            <select id="status-select">
+                <option value="未读">未读</option>
+                <option value="阅读中">阅读中</option>
+                <option value="已读完">已读完</option>
+            </select>
+        </div>
+        <button type="submit">新增记录</button>
+    </form>
+    <p class="tip" id="error-tip"></p>
+    <ul id="record-list"></ul>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
