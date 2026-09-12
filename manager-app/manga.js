@@ -20,10 +20,27 @@ function render() {
         const li = document.createElement('li');
         li.className = `record-item status-${comic.status}`;
 
-        li.textContent = `${comic.title} | ${comic.author} | ${comic.status}`;
+        const textSpan = document.createElement('span');
+        textSpan.textContent = `${comic.title} | ${comic.author} | ${comic.status}`;
+
+        const delBtn = document.createElement('button');
+        delBtn.classList.add('del-btn');
+        delBtn.textContent = "删除";
+        delBtn.dataset.id = comic.id;
+
+        li.appendChild(textSpan);
+        li.appendChild(delBtn);
         recordList.appendChild(li);
     })
 }
+
+recordList.addEventListener('click', function (e) {
+    if (e.target.classList.contains('del-btn')) {
+        const delId = Number(e.target.dataset.id);
+        comicList = comicList.filter(item => item.id !== delId);
+        render();
+    }
+})
 
 form.addEventListener('submit', function (e) {
     e.preventDefault();
